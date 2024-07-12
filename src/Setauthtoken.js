@@ -1,5 +1,35 @@
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+
+const Setauthtoken = () => {
+    const params = useParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!params.authtoken || params.authtoken === "") {  
+            console.log(params);
+            navigate('/login');
+        }
+        else {
+            sessionStorage.setItem('auth-token', params.authtoken);
+            navigate('/');
+        }
+        // eslint-disable-next-line
+    }, [])
+
+  return (
+    <div>Loading...</div>
+  )
+}
+
+export default Setauthtoken;
+
+
+
+
+
 const mongoose = require('mongoose');
-const mongoURI =  "mongodb://root:MzAzMzctaXZhbmln@127.0.0.1:27017";
+const mongoURI =  "mongodb://root:NjM5OS1pdmFuaWdu@127.0.0.1:27017";
 
 const connectToMongo = async (retryCount) => {
     const MAX_RETRIES = 3;
