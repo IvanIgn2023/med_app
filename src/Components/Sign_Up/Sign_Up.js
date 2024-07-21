@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Sign_Up.css';
-
-
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -55,7 +54,7 @@ const SignUp = () => {
           <h1>Sign Up</h1>
         </div>
         <div className="signup-text1" style={{ textAlign: 'left' }}>
-          Already a member? <span><a href="../Login/Login.html" style={{ color: '#2190FF' }}>Login</a></span>
+          Already a member? <span><Link to="/Login" style={{ color: '#2190FF' }}>Login</Link></span>
         </div>
         <div className="signup-form">
           <form onSubmit={handleSubmit}>
@@ -135,6 +134,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './Login.css';
 
 const Login = () => {
@@ -41,7 +42,7 @@ const Login = () => {
           <h2>Login</h2>
         </div>
         <div className="login-text">
-          Are you a new member? <span><a href="../Sign_Up/Sign_Up.html" style={{ color: '#2190FF' }}> Sign Up Here</a></span>
+          Are you a new member? <span><Link to="/Sign_Up" style={{ color: '#2190FF' }}> Sign Up Here</Link></span>
         </div>
         <br />
         <div className="login-form">
@@ -90,5 +91,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
