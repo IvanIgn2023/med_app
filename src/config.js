@@ -1,5 +1,5 @@
-export const API_URL = window.location.hostname === "localhost" ? "http://localhost:8181" : "http://localhost:8181";
+export const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "http://localhost:3000";
 console.log(
-    "API_URL :http://localhost:8181",
+    "API_URL : http://localhost:3000",
     API_URL
 );
