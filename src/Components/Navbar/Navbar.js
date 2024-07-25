@@ -6,7 +6,6 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleClick = () => setClick(!click);
 
@@ -18,27 +17,24 @@ const Navbar = () => {
     localStorage.removeItem("doctorData");
     setIsLoggedIn(false);
 
+    // Remove the reviewFormData from local storage
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key.startsWith("reviewFormData_")) {
         localStorage.removeItem(key);
       }
     }
-    setEmail('');
     setUsername('');
     window.location.reload();
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     const storedEmail = sessionStorage.getItem("email");
-    const storedUsername = sessionStorage.getItem("name");
+    const storedUsername = sessionStorage.getItem("username");
 
     if (storedEmail && storedUsername) {
       setIsLoggedIn(true);
-      setEmail(storedEmail);
       setUsername(storedUsername);
-    } else {
-      console.log('User is not logged in');
     }
   }, []);
 
