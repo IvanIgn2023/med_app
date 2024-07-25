@@ -1,5 +1,5 @@
-export const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "http://localhost:3000";
+export const API_URL = window.location.hostname === "localhost" ? "https://ivanignatjev-8181.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/" : "https://ivanignatjev-8181.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/";
 console.log(
-    "API_URL : http://localhost:3000",
+    "API_URL : ",
     API_URL
 );
