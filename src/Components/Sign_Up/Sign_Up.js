@@ -29,7 +29,8 @@ const Sign_Up = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
             }
 
             const json = await response.json();
@@ -44,11 +45,9 @@ const Sign_Up = () => {
                 window.location.reload();
             } else {
                 if (json.errors) {
-                    for (const error of json.errors) {
-                        setShowerr(error.msg);
-                    }
+                    setShowerr(json.errors.map(error => error.msg).join(', '));
                 } else {
-                    setShowerr(json.error);
+                    setShowerr(json.error || 'Registration failed. Please try again.');
                 }
             }
         } catch (error) {
