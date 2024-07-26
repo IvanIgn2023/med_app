@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar/Navbar';
 import React from 'react';
 import SignUp from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
+import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/Sign_Up" element={<SignUp />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/instant-consultation" element={<InstantConsultation />} /> {/* Add the route */}
           {/* Add other routes as needed */}
         </Routes>
       </div>
