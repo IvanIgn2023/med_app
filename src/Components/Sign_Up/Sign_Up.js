@@ -3,7 +3,7 @@ import './Sign_Up.css';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../config';
 
-const Sign_Up = () => {
+const Sign_Up = ({ setIsLoggedIn, setUsername }) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -41,8 +41,11 @@ const Sign_Up = () => {
                 sessionStorage.setItem("phone", phone);
                 sessionStorage.setItem("email", email);
 
+                // Set state to indicate user is logged in
+                setIsLoggedIn(true);
+                setUsername(name);
+
                 navigate("/");
-                window.location.reload();
             } else {
                 if (json.errors) {
                     setShowerr(json.errors.map(error => error.msg).join(', '));

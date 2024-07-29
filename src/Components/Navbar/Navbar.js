@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react"; // Import useState from React
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, username, setIsLoggedIn, setUsername }) => {
   const [click, setClick] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
 
   const handleClick = () => setClick(!click);
 
@@ -15,34 +13,23 @@ const Navbar = () => {
     sessionStorage.removeItem("phone");
     sessionStorage.removeItem("email");
     localStorage.removeItem("doctorData");
-    setIsLoggedIn(false);
 
     // Remove the reviewFormData from local storage
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
+    Object.keys(localStorage).forEach(key => {
       if (key.startsWith("reviewFormData_")) {
         localStorage.removeItem(key);
       }
-    }
+    });
+
+    setIsLoggedIn(false);
     setUsername('');
-    window.location.reload();
   };
-
-  useEffect(() => { 
-    const storedEmail = sessionStorage.getItem("email");
-    const storedUsername = sessionStorage.getItem("username");
-
-    if (storedEmail && storedUsername) {
-      setIsLoggedIn(true);
-      setUsername(storedUsername);
-    }
-  }, []);
 
   return (
     <nav>
       <div className="nav__logo">
         <Link to="/">
-          StayHealthy <i style={{color:'#2190FF'}} className="fa fa-user-md"></i>
+          StayHealthy <i style={{ color: '#2190FF' }} className="fa fa-user-md"></i>
         </Link>
         <span>.</span>
       </div>
@@ -52,6 +39,9 @@ const Navbar = () => {
       <ul className={click ? 'nav__links active' : 'nav__links'}>
         <li className="link">
           <Link to="/">Home</Link>
+        </li>
+        <li className="link">
+          <Link to="/find-doctor">Find Doctor</Link>
         </li>
         <li className="link">
           <Link to="/search/doctors">Appointments</Link>
@@ -64,9 +54,6 @@ const Navbar = () => {
         </li>
         <li className="link">
           <Link to="/instant-consultation">Instant Consultation</Link>
-        </li>
-        <li className="link">
-          <Link to="/find-doctor">Find Doctor</Link>
         </li>
         {isLoggedIn ? (
           <>
@@ -99,3 +86,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
