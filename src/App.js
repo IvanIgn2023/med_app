@@ -3,19 +3,20 @@ import Navbar from './Components/Navbar/Navbar';
 import React from 'react';
 import SignUp from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
+import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
-  // Render the main App component
   return (
-      <Router>
+    <Router>
       <div>
         <Navbar />
         <Routes>
           <Route path="/Sign_Up" element={<SignUp />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/instant-consultation" element={<InstantConsultation />} /> {/* Add the route */}
+          <Route path="/find-doctor" element={<FindDoctorSearch />} />
+          <Route path="/instant-consultation" element={<InstantConsultation />} />
           {/* Add other routes as needed */}
         </Routes>
       </div>
@@ -24,5 +25,3 @@ function App() {
 }
 
 export default App;
-
-
