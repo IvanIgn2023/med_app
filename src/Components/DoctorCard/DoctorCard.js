@@ -49,36 +49,50 @@ const DoctorCard = ({ name, speciality, experience, ratings, profilePic }) => {
       <p>{speciality}</p>
       <p>{experience} years experience</p>
       <p>Ratings: {ratings}</p>
-      <button onClick={handleBooking}>Book Appointment</button>
-      
-      <Popup
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        modal
-      >
-        <div className="modal-content">
+
+      {/* Booking/Cancellation Button */}
+      <div className="doctor-card-options-container">
+        <Popup
+          open={showModal}
+          onClose={() => setShowModal(false)}
+          modal
+        >
+          <div className="modal-content">
+            {appointments.length > 0 ? (
+              <>
+                <h3>Appointment Booked!</h3>
+                {appointments.map((appointment) => (
+                  <div className="appointment-info" key={appointment.id}>
+                    <p>Name: {appointment.name}</p>
+                    <p>Phone Number: {appointment.phoneNumber}</p>
+                    <p>Date: {appointment.date}</p>
+                    <p>Time: {appointment.time}</p>
+                    <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <AppointmentForm 
+                doctorName={name}
+                doctorSpeciality={speciality}
+                onSubmit={handleFormSubmit}
+              />
+            )}
+          </div>
+        </Popup>
+
+        <button 
+          className={`book-appointment-btn ${appointments.length > 0 ? 'cancel-appointment' : ''}`}
+          onClick={handleBooking}
+        >
           {appointments.length > 0 ? (
-            <>
-              <h3>Appointment Booked!</h3>
-              {appointments.map((appointment) => (
-                <div className="appointment-info" key={appointment.id}>
-                  <p>Name: {appointment.name}</p>
-                  <p>Phone Number: {appointment.phoneNumber}</p>
-                  <p>Date: {appointment.date}</p>
-                  <p>Time: {appointment.time}</p>
-                  <button onClick={() => handleCancel(appointment.id)}>Cancel Appointment</button>
-                </div>
-              ))}
-            </>
+            <div>Cancel Appointment</div>
           ) : (
-            <AppointmentForm 
-              doctorName={name}
-              doctorSpeciality={speciality}
-              onSubmit={handleFormSubmit}
-            />
+            <div>Book Appointment</div>
           )}
-        </div>
-      </Popup>
+          <div>No Booking Fee</div>
+        </button>
+      </div>
     </div>
   );
 };
