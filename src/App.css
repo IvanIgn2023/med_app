@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+.doctor-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; /* Vertically centers the content */
+  min-height: 100vh; /* Ensures the container takes the full height of the viewport */
+  padding: 20px;
+}
