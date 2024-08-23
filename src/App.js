@@ -7,13 +7,15 @@ import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import DoctorCard from './Components/DoctorCard/DoctorCard';
 import Notification from './Components/Notification/Notification';
+import ReviewForm from './Components/ReviewForm/ReviewForm'; // Import ReviewForm
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-  const [notificationMessage, setNotificationMessage] = useState(''); // State to manage notification message
-  const [showNotification, setShowNotification] = useState(false); // State to manage notification visibility
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("email");
@@ -26,18 +28,15 @@ function App() {
   }, []);
 
   const handleBooking = () => {
-    // Example logic for handling booking
     setNotificationMessage('Your appointment has been booked successfully!');
     setShowNotification(true);
   };
 
   const handleCancelBooking = () => {
-    // Example logic for handling booking cancellation
     setNotificationMessage('Your appointment has been canceled.');
     setShowNotification(true);
   };
 
-  // Sample array of doctors
   const doctors = [
     { name: 'Dr. James Brown', speciality: 'Cardiologist', experience: 10, ratings: 4.5, profilePic: null },
     { name: 'Dr. Jameson Daniels', speciality: 'Neurologist', experience: 8, ratings: 4.7, profilePic: null },
@@ -49,7 +48,6 @@ function App() {
       <div>
         <Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
 
-        {/* Pass notification props to Notification component */}
         <Notification 
           message={notificationMessage} 
           visible={showNotification} 
@@ -61,7 +59,7 @@ function App() {
           <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
           <Route path="/find-doctor" element={<FindDoctorSearch />} />
           <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} onCancel={handleCancelBooking} />} />
-          {/* Add other routes as needed */}
+          <Route path="/reviews" element={<ReviewForm />} /> {/* Ensure the path is correct */}
         </Routes>
 
         <div className="doctor-cards-container">

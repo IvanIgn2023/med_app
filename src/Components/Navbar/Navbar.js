@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import useState from React
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -50,7 +50,7 @@ const Navbar = ({ isLoggedIn, username, setIsLoggedIn, setUsername }) => {
           <Link to="/healthblog">Health Blog</Link>
         </li>
         <li className="link">
-          <Link to="/reviews">Reviews</Link>
+          <Link to="/reviews">Reviews</Link> {/* Updated path */}
         </li>
         <li className="link">
           <Link to="/instant-consultation">Instant Consultation</Link>
@@ -86,4 +86,3 @@ const Navbar = ({ isLoggedIn, username, setIsLoggedIn, setUsername }) => {
 };
 
 export default Navbar;
-
