@@ -5,12 +5,15 @@ import SignUp from './Components/Sign_Up/Sign_Up';
 import Login from './Components/Login/Login';
 import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
-import DoctorCard from './Components/DoctorCard/DoctorCard'; // Import the DoctorCard component
+import DoctorCard from './Components/DoctorCard/DoctorCard';
+import Notification from './Components/Notification/Notification';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const [notificationMessage, setNotificationMessage] = useState(''); // State to manage notification message
+  const [showNotification, setShowNotification] = useState(false); // State to manage notification visibility
 
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("email");
@@ -21,6 +24,18 @@ function App() {
       setUsername(storedUsername);
     }
   }, []);
+
+  const handleBooking = () => {
+    // Example logic for handling booking
+    setNotificationMessage('Your appointment has been booked successfully!');
+    setShowNotification(true);
+  };
+
+  const handleCancelBooking = () => {
+    // Example logic for handling booking cancellation
+    setNotificationMessage('Your appointment has been canceled.');
+    setShowNotification(true);
+  };
 
   // Sample array of doctors
   const doctors = [
@@ -33,15 +48,22 @@ function App() {
     <Router>
       <div>
         <Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
+
+        {/* Pass notification props to Notification component */}
+        <Notification 
+          message={notificationMessage} 
+          visible={showNotification} 
+          onClose={() => setShowNotification(false)} 
+        />
+
         <Routes>
           <Route path="/Sign_Up" element={<SignUp setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
           <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
           <Route path="/find-doctor" element={<FindDoctorSearch />} />
-          <Route path="/instant-consultation" element={<InstantConsultation />} />
+          <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} onCancel={handleCancelBooking} />} />
           {/* Add other routes as needed */}
         </Routes>
 
-        {/* Render multiple DoctorCard components */}
         <div className="doctor-cards-container">
           {doctors.map((doctor, index) => (
             <DoctorCard
