@@ -10,7 +10,7 @@
     padding: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    max-width: 400px;
+    max-width: 500px; /* Increase max-width to make the form wider */
     width: 100%;
 }
 
@@ -24,7 +24,7 @@
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     z-index: 1000;
-    max-width: 400px; /* Ensures the form isn't too wide */
+    max-width: 500px; /* Increase max-width to make the form wider */
     width: 100%;
 }
 
