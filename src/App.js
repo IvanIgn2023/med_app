@@ -59,7 +59,12 @@ function App() {
           <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
           <Route path="/find-doctor" element={<FindDoctorSearch />} />
           <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} onCancel={handleCancelBooking} />} />
-          <Route path="/reviews" element={<ReviewForm />} /> {/* Ensure the path is correct */}
+          
+          {/* Render the ReviewForm component */}
+          <Route 
+            path="/reviews" 
+            element={<ReviewForm doctorName="James Brown" />} // Pass doctorName prop as needed
+          />
         </Routes>
 
         <div className="doctor-cards-container">

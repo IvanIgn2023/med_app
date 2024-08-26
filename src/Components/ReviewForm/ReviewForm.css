@@ -1,81 +1,57 @@
-/* Container that holds the whole page */
-.review-form-wrapper {
+.review-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #f0f0f0; /* Light gray background */
-    margin: 0;
+    height: 100vh; /* Full viewport height for vertical centering */
+    background-color: #f9f9f9;
 }
 
-/* Container for the review form itself */
-.review-form-container {
-    border: 1px solid #ccc;
+.review-form-content {
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    max-width: 600px;
-    width: 100%; /* Make sure it scales on smaller screens */
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a slight shadow for better visibility */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    width: 100%;
 }
 
-.review-form-container h2 {
-    margin-top: 0;
-    font-size: 24px;
+h2 {
+    text-align: left;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
-.feedback-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
 }
 
-.feedback-button:hover {
-    background-color: #0056b3;
+.review-table th,
+.review-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
-.feedback-form {
-    margin-top: 20px;
-}
-
-.feedback-form h3 {
-    margin-top: 0;
-    font-size: 20px;
-}
-
-.feedback-form label {
-    display: block;
-    margin: 10px 0 5px;
+.review-table th {
+    background-color: #f2f2f2;
     font-weight: bold;
 }
 
-.feedback-form input, 
-.feedback-form textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Ensures padding does not exceed width */
+.review-table td {
+    vertical-align: middle;
 }
 
-.feedback-form textarea {
-    resize: vertical; /* Allows vertical resizing of the textarea */
-}
-
-.feedback-form button {
-    background-color: #28a745;
-    color: white;
+.feedback-btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
 }
 
-.feedback-form button:hover {
-    background-color: #218838;
+.feedback-btn:hover {
+    background-color: #0056b3;
 }

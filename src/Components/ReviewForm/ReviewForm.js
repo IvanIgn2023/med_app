@@ -2,34 +2,49 @@ import React, { useState } from 'react';
 import './ReviewForm.css';
 
 const ReviewForm = () => {
-    const [showForm, setShowForm] = useState(false);
+    const [reviews, setReviews] = useState([
+        { id: 1, doctorName: 'Dr. John Doe', speciality: 'Cardiology', reviewGiven: false },
+        { id: 2, doctorName: 'Dr. Jane Smith', speciality: 'Dermatology', reviewGiven: false },
+        // Add more doctors as needed
+    ]);
 
-    const handleToggleForm = () => {
-        setShowForm(!showForm);
+    const handleFeedbackClick = (id) => {
+        alert(`Provide feedback for doctor with ID: ${id}`);
     };
 
     return (
-        <div className="review-form-wrapper">
-            <div className="review-form-container">
-                <h2>Consultation Feedback</h2>
-                <p>We value your feedback. Please provide us with your thoughts on the consultation.</p>
-                <button className="feedback-button" onClick={handleToggleForm}>
-                    {showForm ? 'Close Feedback Form' : 'Open Feedback Form'}
-                </button>
-                {showForm && (
-                    <div className="feedback-form">
-                        <h3>Feedback Form</h3>
-                        <form>
-                            <label htmlFor="patientName">Name:</label>
-                            <input type="text" id="patientName" name="patientName" required />
-                            
-                            <label htmlFor="feedback">Feedback:</label>
-                            <textarea id="feedback" name="feedback" rows="5" required></textarea>
-                            
-                            <button type="submit">Submit Feedback</button>
-                        </form>
-                    </div>
-                )}
+        <div className="review-form-container">
+            <div className="review-form-content">
+                <h2>Reviews</h2>
+                <table className="review-table">
+                    <thead>
+                        <tr>
+                            <th>Serial Number</th>
+                            <th>Doctor Name</th>
+                            <th>Doctor Speciality</th>
+                            <th>Provide feedback</th>
+                            <th>Review Given</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reviews.map((review, index) => (
+                            <tr key={review.id}>
+                                <td>{index + 1}</td>
+                                <td>{review.doctorName}</td>
+                                <td>{review.speciality}</td>
+                                <td>
+                                    <button
+                                        className="feedback-btn"
+                                        onClick={() => handleFeedbackClick(review.id)}
+                                    >
+                                        Click Here
+                                    </button>
+                                </td>
+                                <td>{review.reviewGiven ? 'Yes' : 'No'}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
