@@ -3,13 +3,25 @@ import './ReviewForm.css';
 
 const ReviewForm = () => {
     const [reviews, setReviews] = useState([
-        { id: 1, doctorName: 'Dr. John Doe', speciality: 'Cardiology', reviewGiven: false },
-        { id: 2, doctorName: 'Dr. Jane Smith', speciality: 'Dermatology', reviewGiven: false },
-        // Add more doctors as needed
+        { id: 1, doctorName: 'Dr. John Doe', speciality: 'Cardiology', reviewGiven: false, review: '', rating: 0 },
+        { id: 2, doctorName: 'Dr. Jane Smith', speciality: 'Dermatology', reviewGiven: false, review: '', rating: 0 },
     ]);
+    const [showForm, setShowForm] = useState(null);
+    const [currentReview, setCurrentReview] = useState({ name: '', review: '', rating: 0 });
 
     const handleFeedbackClick = (id) => {
-        alert(`Provide feedback for doctor with ID: ${id}`);
+        setShowForm(id);
+    };
+
+    const handleReviewSubmit = (id) => {
+        const updatedReviews = reviews.map(review => {
+            if (review.id === id) {
+                return { ...review, reviewGiven: true, review: currentReview.review, rating: currentReview.rating };
+            }
+            return review;
+        });
+        setReviews(updatedReviews);
+        setShowForm(null);
     };
 
     return (
@@ -36,15 +48,52 @@ const ReviewForm = () => {
                                     <button
                                         className="feedback-btn"
                                         onClick={() => handleFeedbackClick(review.id)}
+                                        disabled={review.reviewGiven}
                                     >
-                                        Click Here
+                                        {review.reviewGiven ? 'Feedback Given' : 'Click Here'}
                                     </button>
                                 </td>
-                                <td>{review.reviewGiven ? 'Yes' : 'No'}</td>
+                                <td>{review.reviewGiven ? `${review.review} (Rating: ${review.rating})` : ''}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+
+                {showForm !== null && (
+                    <div className="review-form-popup">
+                        <h3>Give Your Review</h3>
+                        <label>
+                            Name:
+                            <input
+                                type="text"
+                                value={currentReview.name}
+                                onChange={(e) => setCurrentReview({ ...currentReview, name: e.target.value })}
+                            />
+                        </label>
+                        <label>
+                            Review:
+                            <textarea
+                                value={currentReview.review}
+                                onChange={(e) => setCurrentReview({ ...currentReview, review: e.target.value })}
+                            ></textarea>
+                        </label>
+                        <label>
+                            Rating:
+                            <select
+                                value={currentReview.rating}
+                                onChange={(e) => setCurrentReview({ ...currentReview, rating: parseInt(e.target.value) })}
+                            >
+                                <option value={0}>Select Rating</option>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                            </select>
+                        </label>
+                        <button onClick={() => handleReviewSubmit(showForm)}>Submit</button>
+                    </div>
+                )}
             </div>
         </div>
     );
