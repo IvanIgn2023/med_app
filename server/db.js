@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const mongoURI =  "mongodb://root:MzI2LWl2YW5pZ25h@127.0.0.1:27017";
+// const mongoURI =  "mongodb://root:xwlbEADhMbQlBPP91Egz0Ysu@127.0.0.1:27017";
+const mongoURI =  "mongodb://root:xwlbEADhMbQlBPP91Egz0Ysu@172.21.1.48:27017";
 
 const connectToMongo = async (retryCount) => {
     const MAX_RETRIES = 3;
     const count = retryCount ?? 0;
+    mongoose.set("strictQuery", true);
     try {
         await mongoose.connect(mongoURI, { dbName: 'stayhealthybeta1'});
         console.info('Connected to Mongo Successfully')
