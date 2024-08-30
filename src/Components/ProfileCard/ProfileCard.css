@@ -1,3 +1,4 @@
+/* Style for the profile card container */
 .profile-card {
   position: absolute;
   top: 60px; /* Adjust based on the navbar height */
@@ -6,10 +7,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 1rem;
-  width: 200px;
+  width: 300px; /* Adjusted width to accommodate form elements */
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Style for the profile picture */
 .profile-card .profile-pic {
   width: 80px;
   height: 80px;
@@ -17,9 +22,16 @@
   margin-bottom: 1rem;
 }
 
+/* Style for the title */
 .profile-card h3 {
   margin: 0;
   font-size: 1.2rem;
+}
+
+/* Style for profile details */
+.profile-card .profile-details {
+  width: 100%;
+  text-align: center;
 }
 
 .profile-card p {
@@ -27,17 +39,48 @@
   font-size: 0.9rem;
 }
 
-.profile-card .btn2 {
+/* Style for form elements */
+.profile-card form {
   width: 100%;
-  margin-top: 1rem;
+}
+
+.profile-card label {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.profile-card input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-card button {
+  width: 100%;
+  padding: 0.5rem;
   border: 1px solid #2190FF;
   color: #2190FF;
   background-color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
-.profile-card .btn2:hover {
+.profile-card button:hover {
   background-color: #2190FF;
   color: #fff;
+}
+
+/* Additional style for cancel button */
+.profile-card .cancel-button {
+  border-color: #ccc;
+  color: #000;
+}
+
+.profile-card .cancel-button:hover {
+  background-color: #ccc;
+  color: #000;
 }

@@ -7,7 +7,8 @@ import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 import DoctorCard from './Components/DoctorCard/DoctorCard';
 import Notification from './Components/Notification/Notification';
-import ReviewForm from './Components/ReviewForm/ReviewForm'; // Import ReviewForm
+import ReviewForm from './Components/ReviewForm/ReviewForm';
+import ProfileForm from './Components/ProfileForm/ProfileForm'; // Correct import path for ProfileForm
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -59,12 +60,8 @@ function App() {
           <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />} />
           <Route path="/find-doctor" element={<FindDoctorSearch />} />
           <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} onCancel={handleCancelBooking} />} />
-          
-          {/* Render the ReviewForm component */}
-          <Route 
-            path="/reviews" 
-            element={<ReviewForm doctorName="James Brown" />} // Pass doctorName prop as needed
-          />
+          <Route path="/reviews" element={<ReviewForm doctorName="James Brown" />} />
+          <Route path="/profile" element={<ProfileForm />} /> {/* Added route for ProfileForm */}
         </Routes>
 
         <div className="doctor-cards-container">
