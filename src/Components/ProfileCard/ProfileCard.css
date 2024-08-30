@@ -1,0 +1,43 @@
+.profile-card {
+  position: absolute;
+  top: 60px; /* Adjust based on the navbar height */
+  right: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  z-index: 1000;
+}
+
+.profile-card .profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.profile-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.profile-card p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.profile-card .btn2 {
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid #2190FF;
+  color: #2190FF;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-card .btn2:hover {
+  background-color: #2190FF;
+  color: #fff;
+}
