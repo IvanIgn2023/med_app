@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import ProfileCard from '../ProfileCard/ProfileCard';
-
- // Correct if ProfileCard.js is in Components
-
-
+import ProfileCard from '../ProfileCard/ProfileCard'; // Ensure this path is correct
 
 const Navbar = ({ isLoggedIn, username, setIsLoggedIn, setUsername }) => {
   const [click, setClick] = useState(false);
@@ -64,6 +60,9 @@ const Navbar = ({ isLoggedIn, username, setIsLoggedIn, setUsername }) => {
         </li>
         <li className="link">
           <Link to="/instant-consultation">Instant Consultation</Link>
+        </li>
+        <li className="link">
+          <Link to="/reports">Your Reports</Link> {/* Add link to ReportsLayout */}
         </li>
         {isLoggedIn ? (
           <>

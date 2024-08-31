@@ -1,23 +1,23 @@
-// src/Components/ProfileCard.js
-
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../config";
 import { useNavigate } from "react-router-dom";
+import ReportsLayout from "../ReportsLayout/ReportsLayout";
 import "./ProfileCard.css";
 
-// Define ProfileCard Component
-const ProfileCard = () => {
-  // State variables for user details and edit mode
+const ProfileCard = ({ onProfileUpdate }) => {
   const [userDetails, setUserDetails] = useState({
     name: '',
     phone: '',
     email: ''
   });
   const [editMode, setEditMode] = useState(false);
-  const [updatedDetails, setUpdatedDetails] = useState({});
+  const [updatedDetails, setUpdatedDetails] = useState({
+    name: '',
+    phone: '',
+    email: ''
+  });
   const navigate = useNavigate();
 
-  // Fetch user profile data when component mounts
   useEffect(() => {
     const authtoken = sessionStorage.getItem("auth-token");
     if (!authtoken) {
@@ -27,35 +27,38 @@ const ProfileCard = () => {
     }
   }, [navigate]);
 
-  // Function to fetch user profile data
   const fetchUserProfile = async () => {
     try {
       const authtoken = sessionStorage.getItem("auth-token");
       const email = sessionStorage.getItem("email");
 
-      if (!authtoken) {
+      if (!authtoken || !email) {
         navigate("/login");
-      } else {
-        const response = await fetch(`${API_URL}/api/auth/user`, {
-          headers: {
-            "Authorization": `Bearer ${authtoken}`,
-            "Email": email,
-          },
+        return;
+      }
+
+      const response = await fetch(`${API_URL}/api/auth/user`, {
+        headers: {
+          "Authorization": `Bearer ${authtoken}`,
+          "Email": email,
+        },
+      });
+      if (response.ok) {
+        const user = await response.json();
+        setUserDetails(user);
+        setUpdatedDetails({
+          name: user.name || '',
+          phone: user.phone || '',
+          email: user.email || ''
         });
-        if (response.ok) {
-          const user = await response.json();
-          setUserDetails(user);
-          setUpdatedDetails(user);
-        } else {
-          throw new Error("Failed to fetch user profile");
-        }
+      } else {
+        throw new Error("Failed to fetch user profile");
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Handle input changes for profile editing
   const handleInputChange = (e) => {
     setUpdatedDetails({
       ...updatedDetails,
@@ -63,7 +66,6 @@ const ProfileCard = () => {
     });
   };
 
-  // Handle profile form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -94,6 +96,9 @@ const ProfileCard = () => {
         setUserDetails(updatedDetails);
         setEditMode(false);
         alert("Profile Updated Successfully!");
+        if (onProfileUpdate && typeof onProfileUpdate === 'function') {
+          onProfileUpdate(updatedDetails.name); // Notify App.js of the profile update
+        }
       } else {
         throw new Error("Failed to update profile");
       }
@@ -102,9 +107,17 @@ const ProfileCard = () => {
     }
   };
 
-  // Toggle edit mode
-  const toggleEditMode = () => {
-    setEditMode(!editMode);
+  const toggleEditMode = (e) => {
+    e.stopPropagation();
+    setEditMode(prevEditMode => !prevEditMode);
+  };
+
+  const handleFormClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleShowReports = () => {
+    navigate('/reports'); // Navigate to the ReportsLayout page
   };
 
   return (
@@ -116,7 +129,7 @@ const ProfileCard = () => {
       />
       <h3>Your Profile</h3>
       {editMode ? (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onClick={handleFormClick}>
           <label>
             Name
             <input
@@ -152,7 +165,14 @@ const ProfileCard = () => {
           <p><b>Name:</b> {userDetails.name}</p>
           <p><b>Phone:</b> {userDetails.phone}</p>
           <p><b>Email:</b> {userDetails.email}</p>
-          <button onClick={toggleEditMode}>Edit</button>
+          <div>
+            <button type="button" onClick={toggleEditMode}>
+              Edit
+            </button>
+            <button type="button" onClick={handleShowReports}>
+              Show Reports
+            </button>
+          </div>
         </div>
       )}
     </div>

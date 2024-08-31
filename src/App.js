@@ -8,7 +8,8 @@ import InstantConsultation from './Components/InstantConsultationBooking/Instant
 import DoctorCard from './Components/DoctorCard/DoctorCard';
 import Notification from './Components/Notification/Notification';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
-import ProfileForm from './Components/ProfileForm/ProfileForm'; // Correct import path for ProfileForm
+import ProfileForm from './Components/ProfileForm/ProfileForm';
+import ReportsLayout from './Components/ReportsLayout/ReportsLayout'; // Import ReportsLayout
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -20,13 +21,18 @@ function App() {
 
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("email");
-    const storedUsername = sessionStorage.getItem("username");
+    const storedUsername = sessionStorage.getItem("name"); // Ensure consistency with sessionStorage key
 
     if (storedEmail && storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
     }
   }, []);
+
+  // Callback function to update username
+  const handleProfileUpdate = (updatedUsername) => {
+    setUsername(updatedUsername);
+  };
 
   const handleBooking = () => {
     setNotificationMessage('Your appointment has been booked successfully!');
@@ -46,7 +52,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className="app-container">
         <Navbar isLoggedIn={isLoggedIn} username={username} setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />
 
         <Notification 
@@ -61,7 +67,8 @@ function App() {
           <Route path="/find-doctor" element={<FindDoctorSearch />} />
           <Route path="/instant-consultation" element={<InstantConsultation onBooking={handleBooking} onCancel={handleCancelBooking} />} />
           <Route path="/reviews" element={<ReviewForm doctorName="James Brown" />} />
-          <Route path="/profile" element={<ProfileForm />} /> {/* Added route for ProfileForm */}
+          <Route path="/profile" element={<ProfileForm onProfileUpdate={handleProfileUpdate} />} />
+          <Route path="/reports" element={<ReportsLayout />} /> {/* Add route for ReportsLayout */}
         </Routes>
 
         <div className="doctor-cards-container">
